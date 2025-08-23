@@ -1,0 +1,39 @@
+# FINAL & ROBUST Conda environment configuration
+# Combines Tsinghua mirrors for speed and a pip fallback for problematic packages.
+#
+# To create: conda env create -f environment.yml
+# To activate: conda activate chemo_vision_hf
+
+name: chemo_vision_hf
+
+channels:
+  # Use Tsinghua mirrors for maximum stability and speed in China.
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+  - defaults
+
+dependencies:
+  # Core Python interpreter
+  - python=3.9
+
+  # Cheminformatics library (stable on conda-forge mirror)
+  - rdkit
+  
+  # PyTorch with CUDA support.
+  # We will specify pytorch/nvidia packages directly here. Conda will find them in the tsinghua mirrors.
+  - pytorch
+  - torchvision
+  - torchaudio
+  - pytorch-cuda=13.0 # IMPORTANT: Check and match your NVIDIA driver (e.g., 11.8, 12.1)
+  - nvidia::cudatoolkit # Explicitly ask for cudatoolkit from nvidia channel's mirror
+
+  # Pip itself, and then the packages to be installed via pip
+  - pip
+  - pip:
+    # PyMuPDF is the problematic package, we install it via pip for stability.
+    - PyMuPDF
+    - transformers
+    - sentencepiece
+    - pillow
+    - timm
