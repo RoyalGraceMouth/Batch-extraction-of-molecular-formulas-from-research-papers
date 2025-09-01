@@ -68,7 +68,7 @@ def extract_chemical_structures_from_pdf_v3(pdf_path, output_dir, dpi=300):
             fill_ratio = non_zero_pixels / total_pixels
             
             # 使用您找到的完美参数！
-            if not (0.001 < fill_ratio < 0.1):
+            if not (0.001 < fill_ratio < 0.09):
                 continue
 
             structures_on_page += 1
