@@ -74,8 +74,8 @@ def extract_chemical_structures_from_pdf_v2(pdf_path, output_dir, dpi=300):
             # 设定一个合理的填充率阈值
             # 这个范围可以根据你的文档进行微调
             # 分子式通常不会太稀疏也不会太密集
-            fill_ratio_min = 0.03  # 3%
-            fill_ratio_max = 0.50  # 50%
+            fill_ratio_min = 0.001  
+            fill_ratio_max = 0.1
 
             if not (fill_ratio_min < fill_ratio < fill_ratio_max):
                 # print(f"   - 过滤掉一个对象，填充率: {fill_ratio:.2f}") # (取消注释以进行调试)
